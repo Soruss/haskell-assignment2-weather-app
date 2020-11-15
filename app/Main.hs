@@ -50,10 +50,10 @@ weeklyAvg = getData >>= \x -> weeklyAvgOutput (filtering x)
 getData = readFile "temperature-data.csv"
 
 -- List of days and weeks
-dayArray = ["11th of May 2020", "12th of May 2020", "13th of May 2020", "14th of May 2020", "15th of May 2020", "16th of May 2020", 
-            "17th of May 2020", "18th of May 2020", "19th of May 2020", "20th of May 2020", "21st of May 2020", "22nd of May 2020",
-            "23rd of May 2020", "24th of May 2020"]
-weekArray = ["Week 1 - 11th May -> 17th May", "Week 2 - 18th May -> 24th May"]
+dayArray = ["11th of May 2020 ", "12th of May 2020 ", "13th of May 2020 ", "14th of May 2020 ", "15th of May 2020 ", "16th of May 2020 ", 
+            "17th of May 2020 ", "18th of May 2020 ", "19th of May 2020 ", "20th of May 2020 ", "21st of May 2020 ", "22nd of May 2020 ",
+            "23rd of May 2020 ", "24th of May 2020 "]
+weekArray = ["Week 1 - 11th May -> 17th May ", "Week 2 - 18th May -> 24th May "]
 
 -- Filter our with proper format
 filtering x =
@@ -114,8 +114,11 @@ toDouble = read
 
 -- Gets Average of List of Doubles
 average :: [Double] -> Double
-average xs = sum xs / (int2Double $ length xs)
+average xs = round1dp (sum xs / (int2Double $ length xs))
 
 -- Apply a function on a list
 apply :: (t -> a) -> [t] -> [a]
 apply f xs = [f x | x <- xs]
+
+round1dp :: Double -> Double
+round1dp x = fromIntegral (round $ x * 1e1) / 1e1
